@@ -46,10 +46,6 @@ application callback, use the `--sup` option.
 $ mix gen project «project_name» --sup
 ~~~
 
-## Installation
-
-
-
 
 ## Background
 
@@ -60,7 +56,7 @@ I never really likes the code these generators created. The layout made things
 hard to read, and even harder to change. For example, the `mix.exs`
 file looked like this:
 
-~~~elixir
+~~~ elixir
 defmodule Myapp.Mixfile do
   use Mix.Project
 
@@ -100,7 +96,7 @@ Let's look at a couple of problems.
 
 The various lists are written in a really compact form:
 
-~~~elixir
+~~~ elixir
 [app: :myapp,
  version: "0.1.0",
  elixir: "~> 1.4",
@@ -115,7 +111,7 @@ keys from values.
 
 So, as a first iteration, I'd change this to:
 
-~~~elixir
+~~~ elixir
 [
   app:     :myapp,
   version: "0.1.0",
@@ -133,7 +129,7 @@ lot easier to change the order of entries and add new lines.
 
 Next, let's remove the duplication:
 
-~~~elixir
+~~~ elixir
 in_production = Mix.env == :prod
 [
   app:     :myapp,
@@ -153,7 +149,7 @@ started looking into all this.)
 So let's split out the important (and changeable) stuff, and give it
 its own section in the mixfile.
 
-~~~elixir
+~~~ elixir
 defmodule Myapp.Mixfile do
   use Mix.Project
 
@@ -194,12 +190,13 @@ clear what `extra_applications` is actually for.
 
 So let's cut this down a little:
 
-    # Type "mix help compile.app" for more information
-    def application do
-      [
-        # extra_applications: [:logger]
-      ]
-    end
-
+~~~ elixir
+# Type "mix help compile.app" for more information
+def application do
+  [
+    # extra_applications: [:logger]
+  ]
+end
+~~~
 
 
