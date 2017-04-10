@@ -43,7 +43,7 @@ defmodule Project.Mixfile do
       links:       %{
         "GitHub" => @github,
       },
-      extra:       [ type: :mix_gen_template ],
+      extra:       [ type: :a_template_for_mix_gen ],
     ]
   end
 end

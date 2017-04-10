@@ -194,12 +194,12 @@ clear what `extra_applications` is actually for.
 
 So let's cut this down a little:
 
-  # Type "mix help compile.app" for more information
-  def application do
-    [
-      # extra_applications: [:logger]
-    ]
-  end
+    # Type "mix help compile.app" for more information
+    def application do
+      [
+        # extra_applications: [:logger]
+      ]
+    end
 
 
 
