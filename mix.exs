@@ -37,13 +37,13 @@ defmodule Project.Mixfile do
   defp package do
     [
       name:        @name,
-      files:       ["lib", "mix.exs", "README,md", "LICENSE.md", "template"],
+      files:       ["lib", "mix.exs", "README.md", "LICENSE.md", "template"],
       maintainers: @maintainers,
       licenses:    ["Apache 2.0"],
       links:       %{
         "GitHub" => @github,
       },
-      extra:       [ type: "a_template_for_mix_gen" ],
+      extra:       %{ type: "a_template_for_mix_gen" },
     ]
   end
 end
