@@ -15,9 +15,7 @@ defmodule Mix.Gen.Template.Project do
 
   defp add_defaults_to(assigns) do
     assigns
-    |> Map.merge(%{
-          is_supervisor: false,
-                 })
+    |> Map.merge(%{ is_supervisor?: false })
   end
   
   defp handle_option({ :app, val }, assigns) do
@@ -27,21 +25,21 @@ defmodule Mix.Gen.Template.Project do
   defp handle_option({ :application, val }, assigns) do
     handle_option({ :app, val }, assigns)
   end
+
   
   defp handle_option({ :module, val }, assigns) do
     %{ assigns | project_name_camel_case: val }
   end
-  
 
   
   defp handle_option({ :supervisor, val }, assigns) do
-    assigns |> Map.put(:is_supervisor, val)
-    |> IO.inspect
+    assigns |> Map.put(:is_supervisor?, val)
   end
   
   defp handle_option({ :sup, val }, assigns) do
-    assigns |> Map.put(:is_supervisor, val)
+    handle_option({ :supervisor, val }, assigns)
   end
+
   
   defp handle_option({ :umbrella, _ }, _assigns) do
     Mix.shell.info([ "\nPlease use ",
