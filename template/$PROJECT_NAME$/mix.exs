@@ -26,7 +26,10 @@ defmodule <%= @project_name_camel_case %>.Mixfile do
 
   def application do
     [
-      extra_applications: [    # built-in apps that need starting
+<%= if @is_supervisor do %>
+      mod: { <%= @project_name_camel_case %>.Application, [] },         # Entry point module and parameters
+<% end %>
+      extra_applications: [         # built-in apps that need starting    
         :logger
       ], 
     ]

@@ -2,7 +2,7 @@ defmodule Project.Mixfile do
   use Mix.Project
 
   @name    :gen_template_project
-  @version "0.1.0"
+  @version "0.1.1"
   
   @deps [
     { :mix_templates,  ">0.0.0",  app: false },
@@ -13,8 +13,8 @@ defmodule Project.Mixfile do
   @github      "https://github.com/pragdave/#{@name}"
 
   @description """
-  A replacement for `mix new «project»` which generates files which I
-  believe to be easier to read and maintain.
+  A replacement for `mix new «project»` that generates files which
+  I believe to be easier to read and maintain.
   """
   
   
@@ -43,7 +43,7 @@ defmodule Project.Mixfile do
       links:       %{
         "GitHub" => @github,
       },
-      extra:       %{ type: "a_template_for_mix_gen" },
+#      extra:       %{ "type" => "a_template_for_mix_gen" }, # waiting for hex release
     ]
   end
 end

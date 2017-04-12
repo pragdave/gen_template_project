@@ -6,7 +6,11 @@ easier to read and maintain set of basic files.
 You use it in combination with the `mix gen` mix task, which you will need
 to install.
 
-## Installation
+## New Project Template
+
+        mix gen project «name» [ --into «path» ] [--sup[ervisor]] [--app[lication] «app»] [--module «module»]
+
+## Install
 
 This template is installed using the `template.install` mix task.
 Projects are generated from it using the `mix gen` task.
@@ -21,7 +25,7 @@ Then you can install this template using
     $ mix template.install gen_template_project
     
 
-## Usage
+## Use
 
 To create a basic project, with no supervision and no application, run:
 
@@ -29,22 +33,50 @@ To create a basic project, with no supervision and no application, run:
 $ mix gen project «project_name»
 ~~~
 
-This will create a subdirectory called `project_name` containing your
-seed project. By default this project will be created under your
-current directory; you can change this with the `--to` option:
+`«project_name»` is both the name of the subdirectory that will hold the
+project and the name that will be given to the application. This
+affects entries in `mix.exs` as well as the names of the main
+file in `lib/` and the skeleton test in `test/`. The application
+module name will be the camelcase version of «name».
+
+By default the subdirectory will be created under your
+current directory; you can change this with the `--into` option:
 
 ~~~
-$ mix gen project «project_name» --to some/other/dir
+$ mix gen project «project_name» --into some/other/dir
 ~~~
 
 ### Variants
 
 To create a project with a top-level supervisor contained in an
-application callback, use the `--sup` option. 
+application callback, use the `--sup` (or `--supervisor`) option. 
 
 ~~~
 $ mix gen project «project_name» --sup
 ~~~
+
+The application's `start` function is created in
+`lib/«name»/application.ex`, along with a basic supervisor.
+
+You can change the name used for the application:
+
+~~~
+$ mix gen project «project_name» --app[lication] «app»
+~~~
+
+The original «project_name» parameter will be the
+name used for the directory, and «app» will be used when
+creating file names in that directory and when customizing the
+file contents.
+
+Finally, you can override the name used for the application module:
+
+
+~~~
+$ mix gen project «project_name» `--module «Module»`
+~~~
+
+«Module» must be a valid Elixir module name or alias.
 
 
 ## Background
@@ -52,7 +84,7 @@ $ mix gen project «project_name» --sup
 You probably use `mix new` and/or `mix phoenix.new` to create new Elixir
 projects. 
 
-I never really likes the code these generators created. The layout made things
+I never really liked the code these generators created. The layout made things
 hard to read, and even harder to change. For example, the `mix.exs`
 file looked like this:
 
@@ -142,7 +174,7 @@ in_production = Mix.env == :prod
 ~~~
 
 All very well, but why are we exposing people to `build_embedded` and
-`start_permanent` as it they were as important as the application name
+`start_permanent` as if they were as important as the application name
 and version? In fact, do you even know what they do? (I didn't until I
 started looking into all this.)
 
@@ -182,21 +214,22 @@ defmodule Myapp.Mixfile do
 end
 ~~~
 
+Notice we no longer have a `dep()` function, and all the associated noise.
+
 Now let's think about the `application` function. Every application
 out there has the Logger started. How many use it? I'm guessing less
 than 50%. But we normally just leave it in because it seems like it's
 needed. It also doesn't help that the comments don't really make it
 clear what `extra_applications` is actually for.
 
-So let's cut this down a little:
+So let's cut this down a little, and reformat the list.
 
 ~~~ elixir
 # Type "mix help compile.app" for more information
 def application do
   [
-    # extra_applications: [:logger]
+    # extra_applications: [:logger],
   ]
 end
 ~~~
-
 
