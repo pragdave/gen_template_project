@@ -48,14 +48,14 @@ defmodule Mix.Gen.Template.Project do
     Process.exit(self(), :normal)
   end
 
-  defp handle_option({ :into, _ }, assigns), do: assigns
+  defp handle_option({ _, _ }, assigns), do: assigns
 
-  defp handle_option({ opt, val }, _) do
-    Mix.shell.error([ :red, "\nError: ",
-                      :reset, "unknown option ",
-                      :yellow, "--#{opt} #{inspect val}\n"])
-    Process.exit(self(), :normal)
-  end
+  # defp handle_option({ opt, val }, _) do
+  #   Mix.shell.error([ :red, "\nError: ",
+  #                     :reset, "unknown option ",
+  #                     :yellow, "--#{opt} #{inspect val}\n"])
+  #   Process.exit(self(), :normal)
+  # end
   
   
   
